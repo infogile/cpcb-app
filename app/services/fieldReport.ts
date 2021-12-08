@@ -2,7 +2,7 @@ import { apiClient } from 'app/services/client';
 import ApiConfig from 'app/config/api-config';
 import { Platform } from 'react-native';
 
-export default function fieldreport(data, setProgress = null) {
+export default async function fieldreport(data, setProgress = null) {
   let progressChanger;
   if (setProgress) {
     progressChanger = setProgress;
@@ -19,7 +19,8 @@ export default function fieldreport(data, setProgress = null) {
     }),
   );
   formData.append('body', JSON.stringify(data));
-  var axiosRequest = apiClient.post(ApiConfig.MYFIELDREPORT, formData, {
+  console.log(formData);
+  var axiosRequest = await apiClient.post(ApiConfig.MYFIELDREPORT, formData,{
     headers: {
       'Content-Type': 'multipart/form-data',
       mimeType: 'multipart/form-data',
@@ -27,7 +28,7 @@ export default function fieldreport(data, setProgress = null) {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
       'Access-Control-Allow-Headers': '*',
-      Accept: '*',
+      Accept: 'application/json',
     },
     onUploadProgress: (progress) => {
       const { total, loaded } = progress;
@@ -41,6 +42,9 @@ export default function fieldreport(data, setProgress = null) {
         progressChanger(uploadPercentage);
       }
     },
+  }).then(res=>{
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaeeeeeeeeeeeeeee',res.payload)
+    return res;
   });
   return axiosRequest;
 }

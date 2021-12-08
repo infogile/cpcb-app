@@ -23,7 +23,7 @@ export default function* loginAsync(action: any) {
       state.appReducer.lastSuccessfullyFetched;
     yield put(loginActions.enableLoader());
     const response = yield call(loginUser, action.username, action.password);
-    // console.log(response.data);
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa',response);
 
     //mock response
     // const response = { success: true, token: "Bearer ..." };

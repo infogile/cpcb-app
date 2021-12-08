@@ -8,19 +8,23 @@ import { getDashboarsStatus } from 'app/services/dashboard';
 import { navigateToSectors } from 'app/store/actions/navigationActions';
 import { Alert, ToastAndroid } from 'react-native';
 export default function* fieldReportSubmissionAsync(action: any) {
-  // console.log('Making Request');
+  console.log('Making Request');
+  console.log('ddddddddddddddddddddddddddddddddddddddd',action.data.id)
   try {
     // Remove this inspection after submit
     yield put(inspectionReportAction.removeInspectionById(action.data.id));
-    // field report reducer removefieldreportsbyid
+    // // field report reducer removefieldreportsbyid
     yield put(fieldReportAction.removeFieldReportsById(action.data.id));
     // Make Axios Request
-    const response = yield call(fieldReport, action.data, action.setProgress);
+    let response = yield call(fieldReport, action.data, action.setProgress);
+    // response['data'] = {'success':'true'}
     // console.log(response);
     // if response success - true
     // console.log('form data', action.data);
     // console.log(response);
-    if (response.data.success) {
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',response.data)
+    if (response.data.payload.success) {
+      console.log("chal gaya bro nice wwwwwwwwwwwwww")
       // Navigate to sectors
       yield call(navigateToSectors);
       // field report reducer removefieldreportsbyid
@@ -35,7 +39,8 @@ export default function* fieldReportSubmissionAsync(action: any) {
     // console.log(error);
     // console.log(error);
     // Alert.alert('Unable to complete your request');
+    console.log(error);
     Alert.alert(JSON.stringify(error));
-    ToastAndroid.show('Unable to Submit data', ToastAndroid.LONG);
+    ToastAndroid.show('Unable to Submit data super cool', ToastAndroid.LONG);
   }
 }

@@ -30,6 +30,7 @@ import NavigationService from 'app/navigation/NavigationService';
 
 const getItem = (data: any, index: number) => {
   const itemData = data[index];
+  console.log(itemData);
   return {
     _id: itemData._id,
     code: itemData.factory.unitcode,
@@ -67,12 +68,12 @@ const Item = (data: any) => {
 
   //   getDirections(data);
   // };
-  const onFactory = () =>
+  const onFactory = () =>{
     NavigationService.navigate('Factory', {
       _id: data.name._id,
       unit: data.name.unit,
       code: data.name.code,
-    });
+    });}
   return (
     <Card
       style={{
@@ -124,6 +125,7 @@ const FactoryList = ({ route }) => {
     setSearchQuery(query);
   };
   let DATA = [];
+  console.log('aaaaaaaaaaaaaaaaaaaaaa',route.params);
   DATA = route.params.data;
   DATA = DATA.filter(createFilter(searchQuery, KEYS_TO_FILTERS));
 

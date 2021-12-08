@@ -1,6 +1,6 @@
 import axios from 'axios';
 const apiClient = axios.create({
-  baseURL: 'https://sanatan.website',
+  baseURL: 'http://192.168.0.108',
   responseType: 'json',
   withCredentials: true,
 });

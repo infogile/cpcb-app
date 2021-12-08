@@ -47,6 +47,7 @@ export const inspectionReducer = createReducer(initialState, {
     );
     if (myInspectionsIndex > -1) {
       let myField = state.inspections.splice(myInspectionsIndex, 1);
+      return {...myField, ...state};
     }
     return {
       ...state,

@@ -40,6 +40,7 @@ export const fieldReportReducer = createReducer(initialState, {
     let myFieldIndex = state.fieldReports.findIndex((e) => e.id === action.id);
     if (myFieldIndex > -1) {
       let myField = state.fieldReports.splice(myFieldIndex, 1);
+      return {...myField, ...state};
     }
     return {
       ...state,
